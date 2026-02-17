@@ -8,6 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     name: Pr checks
+    
+    services:
+      mongodb:
+        image: mongo:4.4
+        ports:
+          - 27017:27017
 
     steps:
       - name: Check out project
@@ -17,11 +23,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.11.0
-        with:
-          mongodb-version: "4.4"
 
       - uses: oNaiPs/secrets-to-env-action@v1
         with:
